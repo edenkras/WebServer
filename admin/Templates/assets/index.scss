@@ -1,0 +1,57 @@
+main {
+	display: grid;
+	grid-gap: 50px;
+	grid-template-columns: 3fr 1fr;
+}
+
+#db {
+	& h1 {
+		font-weight: 600;
+		font-size: 18pt;
+		background: rgb(82, 168, 211);
+		color: white;
+		border-radius: 5px 5px 0 0;
+		padding: 5px 10px;
+	}
+
+	& table {
+		border-collapse: collapse;
+		
+		& tr {
+			border-bottom: 1px solid #ddd;
+
+			&:last-child {
+				border: none;
+			}
+
+			&:hover {
+				background: #ddd;
+			}
+		}
+		
+		& td {
+			padding: 10px;
+
+			& a {
+				text-decoration: none;
+
+				&:visited {
+					color: blue;
+				}
+	
+				&:hover {
+					color: rgb(15, 162, 247);
+				}
+			}
+		}
+	}
+}
+
+#admin {
+	background: blue;
+}
+
+.container {
+	border: 1px solid rgba(170, 170, 170, 0.5);
+	border-radius: 5px;
+}

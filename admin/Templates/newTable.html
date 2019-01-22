@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Table | Admin</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="assets/header.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="assets/newTable.css" />
+
+	<script>
+		function addRow() {
+			var table = document.getElementsByTagName("table")[0];
+			var rows = table.getElementsByTagName("tr");
+			var row = rows[1].cloneNode(true);
+			var rowContent = row.childNodes;
+			for (var i = 0; i < rowContent.length; i++) {
+				if (rowContent[i].firstChild && rowContent[i].firstChild.type != "hidden") {
+					rowContent[i].firstChild.checked = false;
+					rowContent[i].firstChild.value = "";
+				}
+			}
+			rows[rows.length-1].after(row);
+		}
+
+		function checkbox(cb) {
+			var rowNodes = cb.parentNode.parentNode.getElementsByTagName("td");
+			for (var i = 0; i < rowNodes.length; i++) {
+				if (rowNodes[i].firstChild == cb) {
+					rowNodes[i+1].firstChild.checked = !cb.checked;
+					break;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<div id="title">
+			<h1>Site administration</h1>
+			<p>
+				Welcome, <b>{{username}}</b>.
+				<a href="/">View site</a>
+				<span> | </span>
+				<a href="">Change password</a>
+				<span> | </span>
+				<a href="">Log out</a>
+			</p>
+		</div>
+		<div id="navigation">
+			<a href="/admin">Home</a>
+			<span> > </span>
+			<span>Create Table</span>
+		</div>
+		<!-- <div style="background: {{status-color}}">
+
+		</div> -->
+	</header>
+	<main>
+		<button onclick="addRow()">Add</button>
+		<form action="" method="post">
+			<span>Table name:</span>
+			<input type="text" name="table" value="">
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Default</th>
+					<th>Index</th>
+					<th>Null</th>
+					<th>A_I</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="name[]"></td>
+					<td>
+						<select name="type[]">
+							<option value="TEXT">TEXT</option>
+							<option value="INTEGER">INTEGER</option>
+							<option value="REAL">REAL</option>
+							<option value="BLOB">BLOB</option>
+						</select>
+					</td>
+					<td><input type="text" name="default[]"></td>
+					<td>
+						<select name="index[]">
+							<option value="---">---</option>
+							<option value="PRIMARY KEY">PRIMARY</option>
+							<option value="UNIQUE">UNIQUE</option>
+						</select>
+					</td>
+					<td><input type="checkbox" value="1" name="null[]" onclick="checkbox(this)"></td>
+					<td style="display: none;"><input type="hidden" value="0" name="null[]" checked></td>
+					<td><input type="checkbox" value="1" name="inc[]" onclick="checkbox(this)"></td>
+					<td style="display: none;"><input type="hidden" value="0" name="inc[]" checked></td>
+				</tr>
+			</table>
+			<input type="submit" value="Create">
+		</form>
+	</main>
+
+	<script>
+		addRow();
+		addRow();
+	</script>
+</body>
+</html>
